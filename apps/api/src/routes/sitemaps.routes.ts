@@ -2,7 +2,7 @@ import { zValidator } from "@hono/zod-validator";
 import { paginationSchema } from "@qaf/zod-schemas";
 import { sql } from "drizzle-orm";
 import { Hono } from "hono";
-import { API_URL, MAX_URLS_PER_SITEMAP, SITE_URL } from "../constants";
+import { API_URL, MAX_URLS_PER_SITEMAP, NAV_LINKS, SITE_URL } from "../constants";
 import {
   eraStats,
   meterStats,
@@ -40,17 +40,13 @@ const app = new Hono<AppContext>()
 
     const totalPoemSitemaps = Math.ceil(Number(count) / MAX_URLS_PER_SITEMAP);
 
-    const staticSitemaps: UrlEntry[] = [
-      "main",
-      "poets",
-      "eras",
-      "meters",
-      "rhymes",
-      "themes",
-    ].map((name) => ({
-      url: `${API_URL}/sitemaps/${name}`,
+    const staticSitemaps: UrlEntry[] = NAV_LINKS.map((link) => ({
+
+      url: `${SITE_URL}${link.href}`,
       lastmod: new Date().toISOString(),
-    }));
+      changefreq: 'monthly',
+      priority: toPriority(link.href === '/' ? 1 : 0.8),
+    }))
 
     const poemSitemaps: UrlEntry[] = Array.from(
       { length: totalPoemSitemaps },
