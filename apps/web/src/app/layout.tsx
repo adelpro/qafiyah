@@ -1,7 +1,15 @@
 import { Footer } from '@/components/footer';
 import { MobileMenu } from '@/components/nav/mobile-menu';
 import { Nav } from '@/components/nav/nav';
-import { isDev, SITE_NAME, SITE_URL, TWITTER_HANDLE, TWITTER_ID } from '@/constants/GLOBALS';
+import {
+  GITHUB_REPO_URL,
+  isDev,
+  SITE_NAME,
+  SITE_URL,
+  TWITTER_HANDLE,
+  TWITTER_ID,
+  TWITTER_URL,
+} from '@/constants/GLOBALS';
 import { htmlHeadMetadata } from '@/constants/SITE_METADATA';
 import { Providers } from '@/providers/react-query';
 import { cn } from '@/utils/conversions/cn';
@@ -152,7 +160,7 @@ export default function RootLayout({
                   width: '112',
                   height: '112',
                 },
-                sameAs: [`https://x.com/qafiyahdotcom`, `https://github.com/alwalxed/qafiyah`],
+                sameAs: [TWITTER_URL, GITHUB_REPO_URL],
               },
               inLanguage: 'ar',
             }),
